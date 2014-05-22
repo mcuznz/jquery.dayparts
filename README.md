@@ -18,7 +18,7 @@ Configuration
 All options can have their defaults overridden (overrode?) and also can be specified per-instance.
 
 ```javascript
-.fn.dayparts.defaults = {
+$.fn.dayparts.defaults = {
     i18nfunc: function(input){ return input; },
     days: {0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'},
     weekStartsOn: 0,
@@ -50,7 +50,7 @@ __Worth noting:__ all text - days of the week, preset names, and labels - is pas
 [{day: 0, hour: 23}, {day: 1, hour: 0}]
 ```
 
-Values for `day` are 0-6 (Sunday to Saturday) and values for hour are 0-23.
+Values for `day` are 0-6 (Sunday to Saturday) and values for `hour` are 0-23.
 
 
 Most other options are self-explanitory.
