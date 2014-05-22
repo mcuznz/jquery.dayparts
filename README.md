@@ -1,7 +1,8 @@
 jquery.dayparts
 ===============
 
-A jQuery Plugin for selecting Hours-of-Day
+A jQuery Plugin for selecting Hours-of-Day.  Demo at http://mcuznz.ca/2014/05/jquery-dayparts-plugin-for-selecting-hours-of-the-day/
+I'll improve on the Demo later to display extra options and catching the update event.
 
 Consider this a Beta at best; it works for the single use case that I needed it for, but might not work in all cases.  It also needs some prettying up.
 
