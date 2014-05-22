@@ -43,7 +43,7 @@ All options can have their defaults overridden (overrode?) and also can be speci
 };
 ```
 
-_Worth noting:_ all text - days of the week, preset names, and labels - is passed through the provided `i18nfunc` before being displayed.  If this isn't behaviour you need, leave the default `i18nfunc` alone and just provide the values in the language of your choice.  If you're creating a multilingual site, however, simply use Translation Keys in place of the Label/Day/Preset text, and pass your i18n Translator function as the `i18nfunc` option.
+__Worth noting:__ all text - days of the week, preset names, and labels - is passed through the provided `i18nfunc` before being displayed.  If this isn't behaviour you need, leave the default `i18nfunc` alone and just provide the values in the language of your choice.  If you're creating a multilingual site, however, simply use Translation Keys in place of the Label/Day/Preset text, and pass your i18n Translator function as the `i18nfunc` option.
 
 `data` is whatever selected dayparts you want to have initially selected.  It takes the form of an array of objects as follows:
 ```javascript
@@ -55,7 +55,7 @@ Values for `day` are 0-6 (Sunday to Saturday) and values for hour are 0-23.
 
 Most other options are self-explanitory.
 
-_A note about Timezones:_ You're on your own here!
+__A note about Timezones:__ You're on your own here!
 
 
 Listening for Changes:
