@@ -282,6 +282,8 @@
 	var toggleGrid = function(dataA, dataB, $grid, dragging) {
 		dragging = (typeof dragging === "undefined") ? false : dragging;
 
+		if (!dataA || !dataB) return false;
+		
 		// Determine the box that's being updated
 		var newState = (dataA['state'] ? 0 : 1);
 
