@@ -86,6 +86,18 @@
 						.data('preset', preset)
 						.val(index)
 				);
+
+				var data = [];
+				$.each(preset.days, function(day) {
+					var row = [];
+					$.each(preset.hours, function(hour){ row.push({day:day, hour:hour}) });
+					$.merge(data, row);
+				});
+
+				if (JSON.stringify(value) == JSON.stringify(data)) {
+					$select.find('option').last().prop('selected', true);
+				};
+
 			});
 			$td.append($select);
 
@@ -95,6 +107,7 @@
 			var $tr = $("<tr />");
 			$tr.append($label).append($td);
 			$thead.append($tr);
+
 		}
 
 		// Row with AM and PM Labels
