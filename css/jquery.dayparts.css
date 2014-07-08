@@ -29,17 +29,15 @@
 	cursor: pointer;
 	line-height: 1px;
 	font-size: 1px;
+	background: #C73535;
 }
 
 .dayparts td.dayparts-cell.hour-active {
-	background: linear-gradient(#90C654, #77AD3A);
-}
-.dayparts td.dayparts-cell.hour-inactive {
-	background: none;
+	background: linear-gradient(#A0E674, #77AD3A);
 }
 .dayparts td.dayparts-cell.dragging-active {
 	background: linear-gradient(#D1EAB4, #A7CE7B);
 }
 .dayparts td.dayparts-cell.dragging-inactive {
-	background: linear-gradient(#FEFEFE, #F0F0F2);
+	background: #A71515;
 }
