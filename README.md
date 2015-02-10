@@ -52,10 +52,9 @@ __Worth noting:__ all text - days of the week, preset names, and labels - is pas
 `data` is whatever selected dayparts you want to have initially selected.  It takes the form of an array of objects as follows:
 ```javascript
 [{day: 0, hour: 23}, {day: 1, hour: 0}]
-
+```
 Values for `day` are 0-6 (Sunday to Saturday) and values for `hour` are 0-23.
 
-```
 This is an example to generate a `Full Coverage` `data`:
 ```javascript
 var data = [];
