@@ -53,6 +53,16 @@ __Worth noting:__ all text - days of the week, preset names, and labels - is pas
 ```javascript
 [{day: 0, hour: 23}, {day: 1, hour: 0}]
 ```
+This is an example to generate a `Full Coverage` `data`:
+```javascript
+var data = [];
+for (day=0;day<7;day++){
+    for (hour=0;hour<24;hour++){
+        data[data.length]={day: day, hour: hour};
+    }
+}
+```
+
 
 Values for `day` are 0-6 (Sunday to Saturday) and values for `hour` are 0-23.
 
