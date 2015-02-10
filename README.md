@@ -20,6 +20,7 @@ All options can have their defaults overridden (overrode?) and also can be speci
 
 ```javascript
 $.fn.dayparts.defaults = {
+    disabled: false, 
     i18nfunc: function(input){ return input; },
     days: {0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'},
     weekStartsOn: 0,
