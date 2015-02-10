@@ -58,8 +58,8 @@ Values for `day` are 0-6 (Sunday to Saturday) and values for `hour` are 0-23.
 This is an example to generate a `Full Coverage` `data`:
 ```javascript
 var data = [];
-for (day=0;day<7;day++){
-    for (hour=0;hour<24;hour++){
+for (var day=0;day<7;day++){
+    for (var hour=0;hour<24;hour++){
         data[data.length]={day: day, hour: hour};
     }
 }
