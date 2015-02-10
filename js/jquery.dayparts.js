@@ -33,17 +33,25 @@
 		var drag_current = null;
 
 		var $table = $('<table />').addClass('dayparts table');
-
+                
+                var minTwoDigits = function (n) {
+                    return (n < 10 ? '0' : '') + n;
+                };
+                
 		var hours = {};
 		for (var i=0; i<24; i++){
 			var thishour = i;
 			if (!settings.use24HFormat) {
 				if (thishour > 12) thishour -= 12;
-				if (thishour == 0) thishour = 12;
+				if (settings.change0Hour && thishour === 0) thishour = 12;
 			} else {
-				if (thishour == 0) thishour = 24;
+				if (settings.change0Hour && thishour === 0) thishour = 24;
 			}
-			hours[i] = thishour;
+                        if (settings.show2DigitsHour){
+                            hours[i] = minTwoDigits(thishour);
+                        }else{
+                            hours[i] = thishour;
+                        }
 		}
 
 		var $thead = $("<thead />");
@@ -263,6 +271,8 @@
 		days: {0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'},
 		weekStartsOn: 0,
 		use24HFormat: true,
+		change0Hour: true,
+		show2DigitsHour: false,
 		showPresets: true,
 		presets: [
 			{label:"Full Coverage", days:[0,1,2,3,4,5,6], hours:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]},
@@ -339,3 +349,4 @@
 	};
 
 }));
+
