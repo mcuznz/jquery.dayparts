@@ -73,7 +73,7 @@
 				if ($(this).find('option:selected').data('preset')) {
 					presetLoader($(this).find('option:selected').data('preset'));
 				}
-			});
+			}).addClass("form-control");
 
 			$select.append($("<option />")
 				.addClass('default-option')
