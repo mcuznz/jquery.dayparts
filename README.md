@@ -41,6 +41,7 @@ $.fn.dayparts.defaults = {
         am: 'AM',
         pm: 'PM',
         presets: 'Presets',
+        presetsSubtitle: '',
         choosePreset: 'Select a Preset'
     },
     data: []

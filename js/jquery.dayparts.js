@@ -111,13 +111,25 @@
                         if (settings.disabled){
                             $select.prop('disabled', true);
                         }
-			$td.append($select);
-
-			var $label = $("<td />").addClass('cell-label presets-label').html(
+                        
+                        var $presetsSubtitle = $("<span />").addClass('cell-label presetsSubtitle-label').html(
+                            settings.i18nfunc(settings.labels.presetsSubtitle)
+                        );
+                
+                        //Presets subtitle before select
+			$td.append($presetsSubtitle);
+                        
+                        //Select
+                        $td.append($select);
+                        
+                        var $label = $("<td />").addClass('cell-label presets-label').html(
 				settings.i18nfunc(settings.labels.presets)
 			);
 			var $tr = $("<tr />");
+			
+			//Presets title before subtitle and select
 			$tr.append($label).append($td);
+
 			$thead.append($tr);
 
 		}
@@ -292,6 +304,7 @@
 			am: 'AM',
 			pm: 'PM',
 			presets: 'Presets',
+			presetsSubtitle: '',
 			choosePreset: 'Select a Preset'
 		},
 		data: []
