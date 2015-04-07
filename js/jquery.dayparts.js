@@ -79,6 +79,14 @@
 				.addClass('default-option')
 				.html(settings.i18nfunc(settings.labels.choosePreset)));
 
+			var val = [];
+			$.each(value, function(index, v) {
+				if (!isNaN(v.day) && isFinite(v.day) && !isNaN(v.hour) && isFinite(v.hour)) {
+					val.push(v);
+				}
+			});
+			val = JSON.stringify(val);
+
 			$.each(settings.presets, function(index, preset) {
 				$select.append(
 					$("<option />")
@@ -88,13 +96,13 @@
 				);
 
 				var data = [];
-				$.each(preset.days, function(day) {
+				$.each(preset.days, function(index, day) {
 					var row = [];
-					$.each(preset.hours, function(hour){ row.push({day:day, hour:hour}) });
+					$.each(preset.hours, function(index2, hour){ row.push({day:day, hour:hour}) });
 					$.merge(data, row);
 				});
 
-				if (JSON.stringify(value) == JSON.stringify(data)) {
+				if (val == JSON.stringify(data)) {
 					$select.find('option').last().prop('selected', true);
 				};
 
