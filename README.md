@@ -20,10 +20,13 @@ All options can have their defaults overridden (overrode?) and also can be speci
 
 ```javascript
 $.fn.dayparts.defaults = {
+    disabled: false, 
     i18nfunc: function(input){ return input; },
     days: {0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'},
     weekStartsOn: 0,
     use24HFormat: true,
+    change0Hour: true,
+    show2DigitsHour: false,
     showPresets: true,
     presets: [
         {label:"Full Coverage", days:[0,1,2,3,4,5,6], hours:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]},
@@ -38,6 +41,7 @@ $.fn.dayparts.defaults = {
         am: 'AM',
         pm: 'PM',
         presets: 'Presets',
+        presetsSubtitle: '',
         choosePreset: 'Select a Preset'
     },
     data: []
@@ -50,9 +54,17 @@ __Worth noting:__ all text - days of the week, preset names, and labels - is pas
 ```javascript
 [{day: 0, hour: 23}, {day: 1, hour: 0}]
 ```
-
 Values for `day` are 0-6 (Sunday to Saturday) and values for `hour` are 0-23.
 
+This is an example to generate a `Full Coverage` `data`:
+```javascript
+var data = [];
+for (var day=0;day<7;day++){
+    for (var hour=0;hour<24;hour++){
+        data[data.length]={day: day, hour: hour};
+    }
+}
+```
 
 Most other options are self-explanitory.
 
