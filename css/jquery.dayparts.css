@@ -61,15 +61,15 @@
     background: none;
     background-size: 0;
 }
-.dayparts td.dayparts-cell span:last-child.dragging-inactive {
-    background: #A71515;
+.dayparts td.dayparts-cell span:last-child.hour-active {
+    background: #A0E674;
     background-size: 0;
 }
 .dayparts td.dayparts-cell span:last-child.dragging-active {
     background: #d1eab4;
     background-size: 0;
 }
-.dayparts td.dayparts-cell span:last-child.hour-active {
-    background: #A0E674;
+.dayparts td.dayparts-cell span:last-child.dragging-inactive {
+    background: #A71515;
     background-size: 0;
 }
