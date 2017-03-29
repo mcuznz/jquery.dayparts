@@ -1,43 +1,75 @@
 .dayparts td.cell-label {
-	padding: 3px;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    padding: 3px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .dayparts td.cell-label.day-label,
 .dayparts td.cell-label.hour-label {
-	cursor: pointer;
-	background: #E2F0FF;
-	text-align: right;
-	font-size: 90%;
+    cursor: pointer;
+    text-align: right;
+    font-size: 90%;
 }
 
 .dayparts td.cell-label.presets-label {
-	text-align: right;
-	padding: 0 5px;
-	vertical-align: middle;
+    text-align: right;
+    padding: 0 5px;
+    vertical-align: middle;
 }
 
 .dayparts td.dayparts-cell {
-	width: 3.6%;
-	padding: 0;
-	margin: 0;
-	cursor: pointer;
-	line-height: 1px;
-	font-size: 1px;
-	background: #C73535;
+    width: 3.6%;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    line-height: 1px;
+    font-size: 1px;
+    background: #C73535;
 }
 
-.dayparts td.dayparts-cell.hour-active {
-	background: linear-gradient(#A0E674, #77AD3A);
+.dayparts td.dayparts-cell span.hour-active {
+    background: #A0E674 linear-gradient(to bottom, rgba(160,230,116,1) 0%,rgba(160,230,116,1) 50%,rgba(255,255,255,1) 51%,rgba(255,255,255,1) 100%);
+    background-size: 1px 100%;
+    background-position: right;
+    background-repeat:no-repeat;
 }
-.dayparts td.dayparts-cell.dragging-active {
-	background: linear-gradient(#D1EAB4, #A7CE7B);
+.dayparts td.dayparts-cell span.dragging-active {
+    background: #D1EAB4 linear-gradient(to bottom, rgba(209,234,180,1) 0%,rgba(209,234,180,1) 50%,rgba(255,255,255,1) 51%,rgba(255,255,255,1) 100%);
+    background-size: 1px 100%;
+    background-position: right;
+    background-repeat:no-repeat;
 }
-.dayparts td.dayparts-cell.dragging-inactive {
-	background: #A71515;
+.dayparts td.dayparts-cell span.dragging-inactive {
+    background: #A71515 linear-gradient(to bottom, rgba(167,21,21,1) 0%,rgba(167,21,21,1) 50%,rgba(255,255,255,1) 51%,rgba(255,255,255,1) 100%);
+    background-size: 1px 100%;
+    background-position: right;
+    background-repeat:no-repeat;
+}
+.dayparts span {
+    display: inline-block;
+    height: 23px;
+    background: linear-gradient(to bottom, rgba(199,53,53,1) 0%,rgba(199,53,53,1) 50%,rgba(255,255,255,1) 51%,rgba(255,255,255,1) 100%);
+    background-size: 1px 100%;
+    background-position: right;
+    background-repeat:no-repeat;
+}
+.dayparts span:last-child {
+    background: none;
+    background-size: 0;
+}
+.dayparts td.dayparts-cell span:last-child.dragging-inactive {
+    background: #A71515;
+    background-size: 0;
+}
+.dayparts td.dayparts-cell span:last-child.dragging-active {
+    background: #d1eab4;
+    background-size: 0;
+}
+.dayparts td.dayparts-cell span:last-child.hour-active {
+    background: #A0E674;
+    background-size: 0;
 }
