@@ -25,8 +25,8 @@ $.fn.dayparts.defaults = {
     days: {0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'},
     weekStartsOn: 0,
     use24HFormat: true,
-    change0Hour: true,
-    show2DigitsHour: false,
+    change0Hour: true, /* Now Works */
+    show2DigitsHour: false, /* Show hour as hh:mm */
     showPresets: true,
     presets: [
         {label:"Full Coverage", days:[0,1,2,3,4,5,6], hours:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]},
@@ -83,6 +83,13 @@ $(selector).on("daypartsUpdate", function() {
   // Your Handler here - recurse over parts and morph as necessary.
 
 });
+```
+
+Update data:
+----------------------
+You can update the current data with the following:
+```javascript
+$(selector).dayparts.updateValue(newData);
 ```
 
 Known Bugs

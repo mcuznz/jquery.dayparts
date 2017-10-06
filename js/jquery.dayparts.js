@@ -15,17 +15,15 @@
 		factory(jQuery);
 	}
 }(function ($) {
-	
+
 	$.fn.dayparts = function( options ) {
 
 		var $el = $(this);
 
 		var dataChange = function(pointA, pointB, dragging) {
-			if (!settings.disabled){
-                            toggleGrid(pointA, pointB, $table, dragging);
-                            // Trigger a catchable event other stuff can listen to
-                            if (!dragging) $el.trigger('daypartsUpdate');
-                        }
+			toggleGrid(pointA, pointB, $table, dragging);
+			// Trigger a catchable event other stuff can listen to
+			if (!dragging) $el.trigger('daypartsUpdate');
 		};
 
 		var settings = $.extend({}, $.fn.dayparts.defaults, options);
@@ -35,38 +33,30 @@
 		var drag_current = null;
 
 		var $table = $('<table />').addClass('dayparts table');
-                
-                var minTwoDigits = function (n) {
-                    return (n < 10 ? '0' : '') + n;
-                };
-                
+
 		var hours = {};
 		for (var i=0; i<24; i++){
 			var thishour = i;
 			if (!settings.use24HFormat) {
 				if (thishour > 12) thishour -= 12;
-				if (settings.change0Hour && thishour === 0) thishour = 12;
+				if (thishour == 0) thishour = 12;
 			} else {
-				if (settings.change0Hour && thishour === 0) thishour = 24;
+				if (settings.change0Hour && thishour == 0) thishour = 24;
 			}
-                        if (settings.show2DigitsHour){
-                            hours[i] = minTwoDigits(thishour);
-                        }else{
-                            hours[i] = thishour;
-                        }
+			hours[i] = thishour;
 		}
 
 		var $thead = $("<thead />");
-		
+
 		var presetLoader = function(preset) {
 			// Blank out the whole grid
 			$table.find('.dayparts-cell').data('state', 0)
-			.removeClass('hour-active').addClass('hour-inactive');
+				.removeClass('hour-active').addClass('hour-inactive');
 
 			$.each(preset.days, function(index, day) {
 				$.each(preset.hours, function(index2, hour) {
 					$table.find('td.day-' + day + '.hour-' + hour)
-					.data('state', 1).addClass('hour-active').removeClass('hour-inactive');
+						.data('state', 1).addClass('hour-active').removeClass('hour-inactive');
 				});
 			});
 
@@ -83,19 +73,11 @@
 				if ($(this).find('option:selected').data('preset')) {
 					presetLoader($(this).find('option:selected').data('preset'));
 				}
-			}).addClass("form-control");
+			});
 
 			$select.append($("<option />")
 				.addClass('default-option')
 				.html(settings.i18nfunc(settings.labels.choosePreset)));
-
-			var val = [];
-			$.each(value, function(index, v) {
-				if (!isNaN(v.day) && isFinite(v.day) && !isNaN(v.hour) && isFinite(v.hour)) {
-					val.push(v);
-				}
-			});
-			val = JSON.stringify(val);
 
 			$.each(settings.presets, function(index, preset) {
 				$select.append(
@@ -104,40 +86,26 @@
 						.data('preset', preset)
 						.val(index)
 				);
+
 				var data = [];
-				$.each(preset.days, function(index, day) {
+				$.each(preset.days, function(day) {
 					var row = [];
-					$.each(preset.hours, function(index2, hour){ row.push({day:day, hour:hour}) });
+					$.each(preset.hours, function(hour){ row.push({day:day, hour:hour}) });
 					$.merge(data, row);
 				});
 
-				if (val == JSON.stringify(data)) {
+				if (JSON.stringify(value) == JSON.stringify(data)) {
 					$select.find('option').last().prop('selected', true);
 				};
 
 			});
-                        if (settings.disabled){
-                            $select.prop('disabled', true);
-                        }
-                        
-                        var $presetsSubtitle = $("<span />").addClass('cell-label presetsSubtitle-label').html(
-                            settings.i18nfunc(settings.labels.presetsSubtitle)
-                        );
-                
-                        //Presets subtitle before select
-			$td.append($presetsSubtitle);
-                        
-                        //Select
-                        $td.append($select);
-                        
-                        var $label = $("<td />").addClass('cell-label presets-label').html(
+			$td.append($select);
+
+			var $label = $("<td />").addClass('cell-label presets-label').html(
 				settings.i18nfunc(settings.labels.presets)
 			);
 			var $tr = $("<tr />");
-			
-			//Presets title before subtitle and select
 			$tr.append($label).append($td);
-
 			$thead.append($tr);
 
 		}
@@ -162,7 +130,7 @@
 		for (var i=0; i<24; i++) {
 			var $hour_td = $("<td />").addClass('cell-label hour-label')
 				.addClass('hour-label-'+ i)
-				.html(hours[i])
+				.html(settings.show2DigitsHour ? convertIntoHours(hours[i]) : hours[i])
 				.data('hour', i)
 				.click(function(e){
 					e.preventDefault();
@@ -274,7 +242,7 @@
 				// Find the cell with the matching day and hour
 				if (val.day !== undefined && val.hour !== undefined) {
 					$table.find('td.day-' + val.day + '.hour-' + val.hour)
-					.data('state', 1).addClass('hour-active');
+						.data('state', 1).addClass('hour-active');
 				};
 			});
 		};
@@ -290,16 +258,34 @@
 		return value;
 	};
 
+	$.fn.dayparts.updateValue = function(newData) {
+		var val = [];
+		var dataLength = newData.length;
+		for (var i = 0; i < dataLength; i++) {
+			val.push({day: newData[i].day, hour: newData[i].hour});
+		}
+
+		value = val;
+
+		var $table = $('table.dayparts');
+		if (value && value.length) {
+			$.each(value, function(index, val) {
+				// Find the cell with the matching day and hour
+				if (val.day !== undefined && val.hour !== undefined) {
+					$table.find('td.day-' + val.day + '.hour-' + val.hour)
+						.data('state', 1).addClass('hour-active');
+				}
+			});
+		}
+	};
+
 	$.fn.dayparts.defaults = {
-		disabled: false,
-                i18nfunc: function(input){ return input; },
+		i18nfunc: function(input){ return input; },
 		days: {0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'},
 		weekStartsOn: 0,
 		use24HFormat: true,
-		change0Hour: true,
-		show2DigitsHour: false,
 		showPresets: true,
-                presets: [
+		presets: [
 			{label:"Full Coverage", days:[0,1,2,3,4,5,6], hours:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]},
 			{label:"Afternoons", days:[0,1,2,3,4,5,6], hours:[12,13,14,15,16,17]},
 			{label:"Evenings", days:[0,1,2,3,4,5,6], hours:[18,19,20,21,22,23]},
@@ -312,7 +298,6 @@
 			am: 'AM',
 			pm: 'PM',
 			presets: 'Presets',
-			presetsSubtitle: '',
 			choosePreset: 'Select a Preset'
 		},
 		data: []
@@ -327,12 +312,18 @@
 		});
 		value = val;
 	};
-	
+
+	var convertIntoHours = function (hour) {
+		var date = new Date(hour * 3600 /* sec per hr */
+			* 1000 /* msec per sec */);
+		return ('0' + date.getUTCHours()).slice(-2) + ':' + ('0' + date.getUTCMinutes()).slice(-2);
+	};
+
 	var toggleGrid = function(dataA, dataB, $grid, dragging) {
 		dragging = (typeof dragging === "undefined") ? false : dragging;
 
 		if (!dataA || !dataB) return false;
-		
+
 		// Determine the box that's being updated
 		var newState = (dataA['state'] ? 0 : 1);
 
@@ -350,7 +341,7 @@
 			if ($(this).data('hour') >= minHour && $(this).data('hour') <= maxHour &&
 				$(this).data('day') >= minDay && $(this).data('day') <= maxDay) {
 				// This Cell is somewhere in the Dragged area
-				
+
 				if (dragging) {
 					if (newState) {
 						$(this).addClass('dragging-active');
@@ -375,4 +366,3 @@
 	};
 
 }));
-
